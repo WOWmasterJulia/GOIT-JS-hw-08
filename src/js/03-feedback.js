@@ -29,7 +29,7 @@ const refs = {
 console.log(refs.form);
 refs.form.addEventListener("submit", onFormSubmit);
 // refs.textarea.addEventListener("input", onTextareaInput);
-// refs.textarea.addEventListener("input", throttle(onTextareaInput, 500));
+refs.textarea.addEventListener("input", throttle(onTextareaInput, 500));
 // 7.Для того, чтобы поле майл тоже выводилось:
 refs.form.addEventListener('input', throttle(e => {
     // console.log('FFFFFFFFFFFF', e.target.name);
@@ -60,7 +60,6 @@ function onFormSubmit(evt) {
 function onTextareaInput(evt) {
     // const message = evt.currentTarget.value;
     const message = evt.target.value;
-    console.log('процедура ontext')
     localStorage.setItem('STORAGE_KEY', message);
 }
 
@@ -72,6 +71,5 @@ function populateTextarea() {
         console.log(savedMessage);
         refs.textarea.value = savedMessage.message;
         refs.form[0].value = savedMessage.email;
-    }
-    
+    }   
 }
