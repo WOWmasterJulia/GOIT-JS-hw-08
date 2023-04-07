@@ -29,7 +29,7 @@ const keyCurrentTime = "videoplayer-current-time";
 //         console.log('title:', title);
 //  });
     
- //___________
+ ___________
 
 const onPlay = function(currentTime) {
   const seconds = currentTime.seconds;
@@ -38,11 +38,12 @@ const onPlay = function(currentTime) {
     localStorage.setItem(keyCurrentTime, seconds);
 };
 
+
 player.on('timeupdate', onPlay);
 
- const timeStop = Number(localStorage.getItem(keyCurrentTime));
+ const timeStop = Number(localStorage.getItem((keyCurrentTime) || 0));
 console.log('keyCurrentTime', timeStop); 
-console.log(typeof(timeStop)); 
+// console.log(typeof(timeStop)); 
 // //___________
 
 player.setCurrentTime(timeStop).then(function(second) {
@@ -56,17 +57,3 @@ player.setCurrentTime(timeStop).then(function(second) {
             break;
     }
 });
-
-// player.setCurrentTime(30.456).then(function(seconds) {
-//     // seconds = the actual time that the player seeked to
-// }).catch(function(error) {
-//     switch (error.name) {
-//         case 'RangeError':
-//             // the time was less than 0 or greater than the video’s duration
-//             break;
-
-//         default:
-//             // some other error occurred
-//             break;
-//     }
-// });
