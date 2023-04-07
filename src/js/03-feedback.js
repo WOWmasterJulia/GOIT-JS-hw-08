@@ -29,17 +29,17 @@ const refs = {
 console.log(refs.form);
 refs.form.addEventListener("submit", onFormSubmit);
 // refs.textarea.addEventListener("input", onTextareaInput);
-refs.textarea.addEventListener("input", throttle(onTextareaInput, 500));
+// refs.textarea.addEventListener("input", throttle(onTextareaInput, 500));
 // 7.Для того, чтобы поле майл тоже выводилось:
 refs.form.addEventListener('input', throttle(e => {
     // console.log('FFFFFFFFFFFF', e.target.name);
     // console.log(e.target.value);
     formData[e.target.name] = e.target.value;
-    console.log(formData);
+    // console.log(formData);
     localStorage.setItem('STORAGE_KEY', JSON.stringify(formData));
     // Сделать так, чтобы сохраняло не только сообщение, но и имя, и все в одном обьекте?????
 },500));
-
+// спрацьовує при завантаженні сторінки:
 populateTextarea();
 
 // 2.Останавливаем поведение по умолчанию
@@ -47,10 +47,10 @@ populateTextarea();
 // Очищаем форму
 function onFormSubmit(evt) {
     evt.preventDefault();
-
-    console.log('Отправляем форму');
     evt.currentTarget.reset();
+    console.log(JSON.parse(localStorage.getItem('STORAGE_KEY')));
     localStorage.removeItem('STORAGE_KEY');
+
 }
 
 // 1.Получаем значение поля
@@ -68,8 +68,8 @@ function onTextareaInput(evt) {
 function populateTextarea() {
     const savedMessage = JSON.parse(localStorage.getItem('STORAGE_KEY'));
     if (savedMessage) {
-        console.log(savedMessage);
-        refs.textarea.value = savedMessage.message;
-        refs.form[0].value = savedMessage.email;
+        // console.log(savedMessage);
+        refs.textarea.value = savedMessage.message || "";
+        refs.form[0].value = savedMessage.email || "";
     }   
 }
