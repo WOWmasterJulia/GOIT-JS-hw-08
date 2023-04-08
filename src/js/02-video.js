@@ -1,3 +1,4 @@
+// ------------------------ВАРИАНТ 1-----------------
 // import throttle from 'lodash.throttle';
 // import Player from '@vimeo/player';
 // console.log(throttle);
@@ -13,7 +14,7 @@
 //     localStorage.setItem("videoplayer-current-time", String(data.seconds))
 // }, 1000));
 
-
+// -----------------------------ВАРИАНТ 2-----------------
 import Player from '@vimeo/player';
 import throttle from 'lodash.throttle';
 
@@ -24,12 +25,11 @@ const keyCurrentTime = "videoplayer-current-time";
 // player.on('play', function() {
 //     console.log('played the video!');
 // });
-
 //  player.getVideoTitle().then(function(title) {
 //         console.log('title:', title);
 //  });
     
- ___________
+//  ___________
 
 const onPlay = function(currentTime) {
   const seconds = currentTime.seconds;
@@ -38,13 +38,13 @@ const onPlay = function(currentTime) {
     localStorage.setItem(keyCurrentTime, seconds);
 };
 
+player.on('timeupdate', throttle(onPlay, 1000));
 
-player.on('timeupdate', onPlay);
-
- const timeStop = Number(localStorage.getItem((keyCurrentTime) || 0));
-console.log('keyCurrentTime', timeStop); 
+const timeStop = Number(localStorage.getItem((keyCurrentTime) || 0));
+    console.log('keyCurrentTime', timeStop); 
 // console.log(typeof(timeStop)); 
-// //___________
+
+//___________
 
 player.setCurrentTime(timeStop).then(function(second) {
 //   second = 0.001;
