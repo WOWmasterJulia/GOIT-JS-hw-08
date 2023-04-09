@@ -47,11 +47,17 @@ populateTextarea();
 // Очищаем форму
 function onFormSubmit(evt) {
     evt.preventDefault();
+    console.dir(refs.form);
+
+    if (refs.form[0].value.trim() === "" || refs.textarea.value.trim() === "") {
+    return alert("Please fill in all the fields!");
+    }
     evt.currentTarget.reset();
     console.log(JSON.parse(localStorage.getItem('STORAGE_KEY')));
     localStorage.removeItem('STORAGE_KEY');
-
 }
+
+
 
 // 1.Получаем значение поля
 // сохраняем его в хранилище
@@ -71,5 +77,5 @@ function populateTextarea() {
         // console.log(savedMessage);
         refs.textarea.value = savedMessage.message || "";
         refs.form[0].value = savedMessage.email || "";
-    }   
+    } 
 }
